@@ -1,0 +1,8 @@
+{
+  "controlAuthRequired": true,
+  "signalingWsBase": "wss://mediaserver.mile.cyberchef.tech",
+  "diagnosticsWire": false,
+  "iceServers": [],
+  "iceCredentialUrl": "https://mediaserver.mile.cyberchef.tech/turn-credentials?username=panther-mmr-dev",
+  "iceTransportPolicy": "relay"
+}

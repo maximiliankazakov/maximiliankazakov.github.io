@@ -1,0 +1,958 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="mh3">
+  <link name="base_footprint" />
+  <joint name="base_footprint_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.0" />
+    <parent link="base_footprint" />
+    <child link="base_link" />
+  </joint>
+  <link name="imu_link" />
+  <joint name="imu_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.1" />
+    <parent link="base_link" />
+    <child link="imu_link" />
+  </joint>
+  <link name="base_link">
+    <visual>
+      <originv rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="link_fl_rev">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_fl_rev.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_fl_rev" type="revolute">
+    <origin rpy="0 0 0" xyz="0.22253 0.16 0.178" />
+    <parent link="base_link" />
+    <child link="link_fl_rev" />
+    <axis xyz="0 0 -1" />
+    <limit effort="1000" lower="-2.7925" upper="2.7925" velocity="314.15" />
+  </joint>
+  <link name="link_fl_con">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_fl_con.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_fl_con" type="continuous">
+    <origin rpy="0 0 0" xyz="0 -0.034 -0.103" />
+    <parent link="link_fl_rev" />
+    <child link="link_fl_con" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="link_fr_rev">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_fr_rev.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_fr_rev" type="revolute">
+    <origin rpy="0 0 0" xyz="0.22253 -0.16016 0.178" />
+    <parent link="base_link" />
+    <child link="link_fr_rev" />
+    <axis xyz="0 0 -1" />
+    <limit effort="1000" lower="-2.7925" upper="2.7925" velocity="314.15" />
+  </joint>
+  <link name="link_fr_con">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_fr_con.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_fr_con" type="continuous">
+    <origin rpy="0 0 0" xyz="0 0.034157 -0.103" />
+    <parent link="link_fr_rev" />
+    <child link="link_fr_con" />
+    <axis xyz="0 -1 0" />
+  </joint>
+  <link name="link_bl_rev">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_bl_rev.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_bl_rev" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.19747 0.16016 0.178" />
+    <parent link="base_link" />
+    <child link="link_bl_rev" />
+    <axis xyz="0 0 -1" />
+    <limit effort="1000" lower="-2.7925" upper="2.7925" velocity="314.15" />
+  </joint>
+  <link name="link_bl_con">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_bl_con.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_bl_con" type="continuous">
+    <origin rpy="0 0 0" xyz="0 -0.034157 -0.103" />
+    <parent link="link_bl_rev" />
+    <child link="link_bl_con" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="link_br_rev">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_br_rev.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_br_rev" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.19747 -0.16 0.178" />
+    <parent link="base_link" />
+    <child link="link_br_rev" />
+    <axis xyz="0 0 -1" />
+    <limit effort="1000" lower="-2.7925" upper="2.7925" velocity="314.15" />
+  </joint>
+  <link name="link_br_con">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_br_con.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_br_con" type="continuous">
+    <origin rpy="0 0 0" xyz="0 0.034 -0.103" />
+    <parent link="link_br_rev" />
+    <child link="link_br_con" />
+    <axis xyz="0 -1 0" />
+  </joint>
+  <link name="link_front_radar">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_front_radar.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_front_radar" type="fixed">
+    <origin rpy="0 0 0" xyz="0.31743 9.6687E-05 0.13936" />
+    <parent link="base_link" />
+    <child link="link_front_radar" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="-3.14" upper="3.14" velocity="0" />
+  </joint>
+  <link name="link_back_radar">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_back_radar.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_back_radar" type="fixed">
+    <origin rpy="0 -0.017453 3.14159" xyz="-0.29236 0.00020043 0.13333" />
+    <parent link="base_link" />
+    <child link="link_back_radar" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="-3.14" upper="3.14" velocity="0" />
+  </joint>
+  <link name="link_odin1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/link_odin1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_odin1" type="fixed">
+    <origin rpy="0 -0.69813 0" xyz="-0.16734 0.0055 1.6718" />
+    <parent link="base_link" />
+    <child link="link_odin1" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="-3.14" upper="3.14" velocity="0" />
+  </joint>
+  <link name="body_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_movebase/body_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="body_joint" type="prismatic">
+    <origin rpy="0 0 0" xyz="0.19003 0 1.3632" />
+    <parent link="base_link" />
+    <child link="body_link" />
+    <axis xyz="0 0 -1" />
+    <limit effort="0" lower="0" upper="0.6" velocity="0" />
+  </joint>
+  <link name="link_head0">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_head/link_head0.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_head0" type="revolute">
+    <origin rpy="0 0 0" xyz="0.022161 0 0.1129" />
+    <parent link="body_link" />
+    <child link="link_head0" />
+    <axis xyz="0 1 0" />
+    <limit effort="10" lower="-0.348" upper="1.5" velocity="100" />
+  </joint>
+  <link name="link_head1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_head/link_head1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_head1" type="revolute">
+    <origin rpy="0 0 0" xyz="1.1852E-05 0 0.067987" />
+    <parent link="link_head0" />
+    <child link="link_head1" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="20" />
+  </joint>
+  <link name="link_rgbd">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_head/link_rgbd.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rgbd" type="fixed">
+    <origin rpy="0 0 1.3881E-05" xyz="0.075727 0 0.10101" />
+    <parent link="link_head1" />
+    <child link="link_rgbd" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="-3.14" upper="3.14" velocity="0" />
+  </joint>
+  <link name="link_both_eyes">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_head/link_both_eyes.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_both_eyes" type="fixed">
+    <origin rpy="0 0 0" xyz="0.078487 -1.4036E-05 0.062042" />
+    <parent link="link_head1" />
+    <child link="link_both_eyes" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="-3.14" upper="3.14" velocity="0" />
+  </joint>
+  <link name="link_la0">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la0.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la0" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0.0595 0" />
+    <parent link="body_link" />
+    <child link="link_la0" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="-1.046" upper="0.697" velocity="0" />
+  </joint>
+  <link name="link_la1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0.122 0" />
+    <parent link="link_la0" />
+    <child link="link_la1" />
+    <axis xyz="0 1 0" />
+    <limit effort="0" lower="-3.14" upper="0.785" velocity="0" />
+  </joint>
+  <link name="link_la2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la2.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la2" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0.0905 0" />
+    <parent link="link_la1" />
+    <child link="link_la2" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="1.57" velocity="0" />
+  </joint>
+  <link name="link_la3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la3.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la3" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 -0.13647" />
+    <parent link="link_la2" />
+    <child link="link_la3" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="-2.79" upper="2.79" velocity="0" />
+  </joint>
+  <link name="link_la4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la4.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la4" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 -0.13753" />
+    <parent link="link_la3" />
+    <child link="link_la4" />
+    <axis xyz="0 1 0" />
+    <limit effort="0" lower="-2.23" upper="0" velocity="0" />
+  </joint>
+  <link name="link_la5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la5.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la5" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 -0.14125" />
+    <parent link="link_la4" />
+    <child link="link_la5" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="-2.79" upper="2.79" velocity="0" />
+  </joint>
+  <link name="link_la6">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la6.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la6" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.004 0 -0.13475" />
+    <parent link="link_la5" />
+    <child link="link_la6" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="-0.87" upper="0.87" velocity="0" />
+  </joint>
+  <link name="link_la7">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_arm/link_la7.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_la7" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="link_la6" />
+    <child link="link_la7" />
+    <axis xyz="0 1 0" />
+    <limit effort="0" lower="-0.69" upper="0.69" velocity="0" />
+  </joint>
+  <link name="link_ra0">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra0.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra0" type="revolute">
+    <origin rpy="0 0 0" xyz="0 -0.0595 0" />
+    <parent link="body_link" />
+    <child link="link_ra0" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="-0.697" upper="1.046" velocity="0" />
+  </joint>
+  <link name="link_ra1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra1.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 -0.122 0" />
+    <parent link="link_ra0" />
+    <child link="link_ra1" />
+    <axis xyz="0 1 0" />
+    <limit effort="0" lower="-3.14" upper="0.785" velocity="0" />
+  </joint>
+  <link name="link_ra2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra2.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra2" type="revolute">
+    <origin rpy="0 0 0" xyz="0 -0.0905 0" />
+    <parent link="link_ra1" />
+    <child link="link_ra2" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="-1.57" upper="0" velocity="0" />
+  </joint>
+  <link name="link_ra3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra3.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra3" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 -0.13647" />
+    <parent link="link_ra2" />
+    <child link="link_ra3" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="-2.79" upper="2.79" velocity="0" />
+  </joint>
+  <link name="link_ra4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra4.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra4" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 -0.13753" />
+    <parent link="link_ra3" />
+    <child link="link_ra4" />
+    <axis xyz="0 1 0" />
+    <limit effort="0" lower="-2.23" upper="0" velocity="0" />
+  </joint>
+  <link name="link_ra5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra5.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra5" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 -0.14125" />
+    <parent link="link_ra4" />
+    <child link="link_ra5" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="-2.79" upper="2.79" velocity="0" />
+  </joint>
+  <link name="link_ra6">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra6.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra6" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.004 0 -0.13475" />
+    <parent link="link_ra5" />
+    <child link="link_ra6" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="-0.87" upper="0.87" velocity="0" />
+  </joint>
+  <link name="link_ra7">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_arm/link_ra7.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_ra7" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="link_ra6" />
+    <child link="link_ra7" />
+    <axis xyz="0 1 0" />
+    <limit effort="0" lower="-1.57" upper="1.57" velocity="0" />
+  </joint>
+  <joint name="left_connector_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 -0.05" />
+    <parent link="link_la7" />
+    <child link="left_connector" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="left_connector">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="link_lf">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.537254901960784 0.349019607843137 0.337254901960784 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0054849 -0.0029567 -0.083332" />
+    <parent link="left_connector" />
+    <child link="link_lf" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf00">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf00.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf00" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0125 0.002" />
+    <parent link="link_lf" />
+    <child link="link_lf00" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf01">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf01.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf01" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0077664 0.016238" />
+    <parent link="link_lf00" />
+    <child link="link_lf01" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf02">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf02.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf02" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.057427 -0.030959" />
+    <parent link="link_lf01" />
+    <child link="link_lf02" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf03">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf03.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf03" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.019138 -0.051481" />
+    <parent link="link_lf02" />
+    <child link="link_lf03" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf10">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf10.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf10" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.0125 0.002" />
+    <parent link="link_lf" />
+    <child link="link_lf10" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf11">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf11.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf11" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.0077664 0.016238" />
+    <parent link="link_lf10" />
+    <child link="link_lf11" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf12">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf12.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf12" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.057427 -0.030959" />
+    <parent link="link_lf11" />
+    <child link="link_lf12" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_lf13">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_left_gripper3/link_lf13.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_lf13" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.019 -0.051" />
+    <parent link="link_lf12" />
+    <child link="link_lf13" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <joint name="right_connector_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 -0.05" />
+    <parent link="link_ra7" />
+    <child link="right_connector" />
+    <axis xyz="0 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="right_connector">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="link_rf">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.537254901960784 0.349019607843137 0.337254901960784 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0054849 -0.0029567 -0.083332" />
+    <parent link="right_connector" />
+    <child link="link_rf" />
+    <axis xyz="0 0 1" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf00">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf00.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf00" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0125 0.002" />
+    <parent link="link_rf" />
+    <child link="link_rf00" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf01">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf01.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf01" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0077664 0.016238" />
+    <parent link="link_rf00" />
+    <child link="link_rf01" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf02">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf02.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf02" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.057427 -0.030959" />
+    <parent link="link_rf01" />
+    <child link="link_rf02" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf03">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf03.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf03" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.019138 -0.051481" />
+    <parent link="link_rf02" />
+    <child link="link_rf03" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf10">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf10.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf10" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.0125 0.002" />
+    <parent link="link_rf" />
+    <child link="link_rf10" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf11">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf11.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf11" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.0077664 0.016238" />
+    <parent link="link_rf10" />
+    <child link="link_rf11" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf12">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf12.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf12" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.057427 -0.030959" />
+    <parent link="link_rf11" />
+    <child link="link_rf12" />
+    <axis xyz="-1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+  <link name="link_rf13">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mh3_right_gripper3/link_rf13.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="joint_rf13" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.019 -0.051" />
+    <parent link="link_rf12" />
+    <child link="link_rf13" />
+    <axis xyz="1 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
+  </joint>
+</robot>
