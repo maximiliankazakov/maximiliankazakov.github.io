@@ -4,5 +4,6 @@
   "diagnosticsWire": false,
   "iceServers": [],
   "iceCredentialUrl": "https://mediaserver.mile.cyberchef.tech/turn-credentials?username=panther-mmr-dev",
+  "controlPacketLifetimeMs": 100,
   "iceTransportPolicy": "relay"
 }
