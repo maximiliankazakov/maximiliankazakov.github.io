@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f8">
+  <meta name="description" content="План съёмки 34 SKU для YOLO: эксперименты, углы, выкладка и журнал проездов.">
+  <title>Съёмка SKU · YOLO Lab</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="#A1_shelf1" aria-label="Съёмка SKU — первый эксперимент"><span class="brand-mark" aria-hidden="true">◫</span><span>Съёмка SKU <small>YOLO LAB</small></span></a>
+    <div class="header-progress"><span id="overall-count">0 из 60 проверено</span><div class="progress-track"><div id="progress-bar"></div></div></div>
+    <button class="button quiet mobile-only" id="toggle-sidebar" aria-expanded="false" aria-controls="sidebar">Эксперименты</button>
+    <button class="button quiet" id="open-sync"><span id="sync-label">Общий журнал</span></button>
+    <button class="button quiet" id="open-journal">Журнал <span aria-hidden="true">↗</span></button>
+  </header>
+  <div class="workspace">
+    <aside class="sidebar" id="sidebar" aria-label="Выбор эксперимента">
+      <div class="sidebar-heading"><h2>Эксперименты</h2><span class="count-pill" id="result-count">60</span></div>
+      <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Название SKU, ID или A1…" aria-label="Поиск SKU или эксперимента" autocomplete="off"><kbd>/</kbd></label>
+      <div class="series-tabs" role="group" aria-label="Серия экспериментов">
+        <button data-series="all" class="selected" aria-pressed="true">Все</button><button data-series="A" aria-pressed="false">A</button><button data-series="B" aria-pressed="false">B</button><button data-series="C" aria-pressed="false">C</button><button data-series="D" aria-pressed="false">D</button><button data-series="isolated" aria-pressed="false" title="Одиночные SKU">SKU</button><button data-series="empty" aria-pressed="false" title="Пустые полки">∅</button>
+      </div>
+      <div class="filters"><select id="shelf-filter" aria-label="Фильтр по полке"><option value="all">Все полки</option><option value="1">Верхняя</option><option value="2">Средняя</option><option value="3">Нижняя</option></select><select id="status-filter" aria-label="Фильтр по статусу"><option value="all">Все статусы</option><option value="planned">Не начато</option><option value="collecting">Сбор</option><option value="captured">Записано</option><option value="checked">Проверено</option><option value="needs_review">Нужна проверка</option><option value="reshoot">Переснять</option></select></div>
+      <nav id="scene-list" class="scene-list" aria-label="Эксперименты по порядку"></nav>
+      <div class="sidebar-footer"><span class="green-dot"></span>План: 34 SKU · 3 экземпляра<br><small id="sync-footer">Общий журнал · подключите команду</small></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="detail"></div>
+    </main>
+  </div>
+  <dialog id="product-dialog" aria-labelledby="product-dialog-title"><div id="product-content"></div></dialog>
+  <dialog id="journal-dialog" aria-labelledby="journal-title">
+    <div class="dialog-header"><div><p class="eyebrow">СОХРАНЕНИЕ РЕЗУЛЬТАТОВ</p><h2 id="journal-title">Журнал съёмки</h2></div><button class="icon-button close-dialog" aria-label="Закрыть журнал">×</button></div>
+    <p>Сохраняются статусы, имена записей и заметки. После подключения команды они синхронизируются между устройствами. Без связи изменения ждут отправки на этом устройстве.</p>
+    <div id="journal-summary" class="journal-summary"></div>
+    <div class="journal-actions"><button class="button primary" id="export-csv">Скачать таблицу CSV</button><button class="button" id="export-json">Резервная копия JSON</button></div>
+    <div class="import-block"><label for="import-file">Восстановить резервную копию</label><p class="muted">Записи из файла заменят отметки соответствующих экспериментов. Остальные отметки сохранятся.</p><input id="import-file" type="file" accept="application/json,.json"></div>
+    <p class="muted small">Здесь ведётся журнал подготовки и съёмки. Управление роботом выполняется отдельным скриптом.</p>
+  </dialog>
+  <input id="capture-folder" type="file" webkitdirectory multiple hidden>
+  <dialog id="sync-dialog" aria-labelledby="sync-title"><div class="dialog-header"><h2 id="sync-title">Общий журнал команды</h2><button class="icon-button close-dialog" aria-label="Закрыть синхронизацию">×</button></div><p>Одинаковый код на всех устройствах. Синхронизация обычно занимает до 8 секунд.</p><form id="connect-form"><label class="field">Код команды<input id="team-code" type="password" autocomplete="off" required minlength="20" maxlength="100"></label><p id="connect-error" role="alert"></p><button class="button primary" id="connect-submit">Подключить общий журнал</button></form><p id="sync-state" role="status"></p><button class="button" id="refresh-sync">Обновить сейчас</button><button class="button quiet" id="disconnect-sync">Отключить устройство</button><div id="conflict-list"></div><p class="muted small">Разные поля объединяются. При одновременном изменении одного поля выберите версию. Код запоминается в этом браузере.</p></dialog>
+  <dialog id="review-dialog" class="review-dialog" aria-labelledby="review-title"><div class="dialog-header"><h2 id="review-title">Проверка кадров</h2><button class="icon-button close-dialog" aria-label="Закрыть просмотр">×</button></div><p id="review-position"></p><div class="review-stage"><img id="review-image" alt="Кадр для проверки"><p id="review-load" role="status"></p></div><div id="review-strip" class="review-strip"></div><div class="review-fields"><label class="field">Проверяющий<input id="reviewer-name" maxlength="100" placeholder="Ваше имя"></label><label class="field">Причина отклонения<select id="reject-reason"><option>Смаз</option><option>Рука перекрывает товар</option><option>Неверный SKU или выкладка</option><option>Неверный ракурс</option><option>Обрезан одиночный товар</option><option>Плохое освещение</option><option>Другая причина</option></select></label></div><div id="review-controls" class="capture-actions"><button class="button" data-capture="previous">←</button><button class="button primary" data-capture="accept">Принять · Enter</button><button class="button" data-capture="reject">Отклонить · R</button><button class="button" data-capture="next">→</button><button class="button" data-capture="reshoot" id="review-reshoot">Переснять</button><button class="button primary" data-capture="check" id="review-check">✓ Задание проверено</button></div><p class="muted small">Для одиночного товара проверяйте целые границы и отсутствие руки. Для полки естественные перекрытия и обрезанные соседние товары допустимы. Стрелки — переход, Enter — принять.</p></dialog>
+  <dialog id="problem-dialog" aria-labelledby="problem-title"><div class="dialog-header"><h2 id="problem-title">Сообщить о проблеме</h2><button class="icon-button close-dialog" aria-label="Закрыть сообщение">×</button></div><form id="problem-form"><label class="field">Причина<select id="problem-reason"></select></label><label class="field">Комментарий<textarea id="problem-comment" maxlength="4000"></textarea></label><button class="button primary">Передать на проверку</button></form></dialog>
+  <dialog id="history-dialog" aria-labelledby="history-title"><div class="dialog-header"><h2 id="history-title">История съёмки</h2><button class="icon-button close-dialog" aria-label="Закрыть историю">×</button></div><div id="history-list"></div></dialog>
+  <dialog id="agent-dialog" class="agent-dialog" aria-labelledby="agent-title"><div class="dialog-header"><h2 id="agent-title">Камера и сбор</h2><button class="icon-button close-dialog" aria-label="Закрыть камеру">×</button></div><form id="agent-form"><label class="field">Адрес компьютера сбора<input id="agent-url" type="url" value="http://127.0.0.1:8935" required></label><label class="field">Код подключения<input id="agent-token" type="password" autocomplete="off" required></label><button class="button">Подключиться</button><button class="button quiet" type="button" data-capture="disconnect-agent">Отключиться</button></form><p id="agent-error" role="alert"></p><h3 id="agent-state">Не подключено</h3><p id="agent-instruction"></p><img id="live-preview" alt="Живой предпросмотр камеры"><p id="agent-progress"></p><label class="field">Оператор<input id="operator-name" maxlength="100" placeholder="Ваше имя"></label><div id="agent-controls" class="capture-actions"><button class="button primary" data-capture="agent-start">Начать задание</button><button class="button" data-capture="agent-save">Сохранить кадр</button><label class="field">Шаг для пересъёмки<input id="agent-step" type="number" min="1" max="12" value="1"></label><button class="button" data-capture="agent-reshoot">Переснять ракурс</button><button class="button" data-capture="agent-stop">Остановить сбор</button><button class="button" data-capture="agent-import">Передать кадры на проверку</button></div><p class="muted small">Для полки выполняется полный маршрут. Запуск движения доступен только при включённом локальном разрешении. Пересъёмка отдельной точки полки не поддерживается.</p></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
