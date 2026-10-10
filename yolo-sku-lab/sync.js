@@ -1,4 +1,4 @@
-export const API_BASE=(typeof location!=='undefined'&&['localhost','127.0.0.1'].includes(location.hostname))?location.origin:'https://yolo-sku-lab-34-1010.epic-luck-9701.chatgpt.site';
+export const API_BASE='https://yolo-sku-lab-34-1010.epic-luck-9701.chatgpt.site';
 export const DEFAULTS={status:'planned',note:'',session:'',capture:'',review:'',problem:'',operator:''};
 export const LIMITS={status:30,note:4000,session:120,capture:120000,review:20000,problem:6000,operator:100};
 export class JournalSync {

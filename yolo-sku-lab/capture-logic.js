@@ -1,7 +1,7 @@
 export const PROBLEMS=['Товар отсутствует','Упаковка отличается от фотографии','Не могу уверенно определить товар','Камера не показывает изображение','Не получается получить резкий кадр','Не получается выполнить шаг или движение','Другая причина'];
 export function parse(value,fallback={}){try{return JSON.parse(value)||fallback;}catch{return fallback;}}
 export function taskCount(task){return task.mode==='isolated'?12:28;}
-export function canCheck(capture,review,count){return capture?.complete===true&&capture.frames?.length===count&&new Set(capture.frames.map(f=>f.id)).size===count&&review.sessionId===capture.sessionId&&capture.frames.every(f=>review.decisions?.[f.id]?.decision==='accepted');}
+export function canCheck(capture,review,count){return capture?.complete===true&&capture.frames?.length===count&&new Set(capture.frames.map(f=>f.id)).size===count&&review.sessionId===capture.sessionId&&capture.frames.every(f=>review.decisions?.[f.id]?.decision==='accepted'&&review.decisions[f.id].imageKey===f.imageKey);}
 export function validateCapture(c,task){
  const n=taskCount(task);if(!c||c.sceneId!==task.id||typeof c.sessionId!=='string'||!/^[-a-zA-Z0-9_]{8,100}$/.test(c.sessionId)||c.frames?.length>n||!c.frames?.length)throw new Error('Сессия не соответствует заданию');
  if(new Set(c.frames.map(f=>f.id)).size!==c.frames.length)throw new Error('Повторяющиеся шаги');
