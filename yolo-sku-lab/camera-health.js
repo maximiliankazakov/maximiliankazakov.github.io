@@ -1,4 +1,5 @@
-export function cameraPresentation(s,{connected=false,stateAge=Infinity,previewAge=Infinity,hasFrame=false,viewOpen=false,previewFailed=false}={}){
+export function cameraPresentation(s,{connected=false,connecting=false,stateAge=Infinity,previewAge=Infinity,hasFrame=false,viewOpen=false,previewFailed=false}={}){
+ if(connecting)return {tone:'waiting',label:'Подключаемся к камере',detail:'Проверяем связь с локальным сервисом просмотра.'};
  if(!connected)return {tone:'neutral',label:'Камера не подключена',detail:'Подключите локальный сервис просмотра. Это не запускает запись или движение.'};
  if(!s||stateAge>2500)return {tone:'bad',label:'Связь с камерой потеряна',detail:'Не ориентируйтесь на последний кадр: состояние камеры сейчас неизвестно.'};
  if(s.cameraError)return {tone:'bad',label:'Ошибка камеры',detail:s.cameraError};
